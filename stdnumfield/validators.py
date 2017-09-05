@@ -12,13 +12,16 @@ from stdnumfield.utils import import_stdnum, listify
 class StdnumFormatValidator(object):
     formats = []
     alphabets = None
+    exception_text = 'Value does not match with any of the formats: "{}"'
     empty = (None, '')
 
-    def __init__(self, formats, alphabets=None):
+    def __init__(self, formats, alphabets=None, exception_text=None):
         if formats is not None:
             self.formats = listify(formats)
         if alphabets is not None:
             self.alphabets = listify(alphabets)
+        if exception_text is not None:
+            self.exception_text = exception_text
 
     def _get_formats(self):
         if not self.formats:
@@ -54,5 +57,5 @@ class StdnumFormatValidator(object):
                 else:
                     return
         raise ValidationError(
-            'Value does not match with any of the formats: "{}"'
+            self.exception_text
             .format(truncatechars(', '.join(self.formats), 30)))

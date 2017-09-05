@@ -67,6 +67,9 @@ class FormFieldValidateTest(TestCase):
     def test_validate(self, validator_class):
         field = StdnumField(formats=self.formats)
         field.validate(VALID_OIB)
-        validator_class.assert_called_once_with(self.formats, None)
+        validator_class.assert_called_once_with(
+            self.formats,
+            exception_text=None,
+        )
         validator_instance = validator_class.return_value
         validator_instance.assert_called_once_with(VALID_OIB)

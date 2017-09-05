@@ -35,13 +35,22 @@ class StdNumField(models.CharField):
             alphabets = listify(alphabets)
         else:
             alphabets = None
+        if 'exception_text' in kwargs:
+            self.exception_text = kwargs.pop('exception_text')
+        else:
+            self.exception_text = None
         self.formats = formats
         self.alphabets = alphabets
         # TODO make dynamic when/if stdnum provides this data:
         kwargs["max_length"] = 254
         super(StdNumField, self).__init__(*args, **kwargs)
         self.validators.append(
-            StdnumFormatValidator(self.formats, self.alphabets))
+            StdnumFormatValidator(
+                self.formats,
+                self.alphabets,
+                self.exception_text,
+            ),
+        )
 
     def deconstruct(self):
         name, path, args, kwargs = super(StdNumField, self).deconstruct()
@@ -58,6 +67,7 @@ class StdNumField(models.CharField):
             'form_class': StdnumField,
             'formats': self.formats,
             'alphabets': self.alphabets,
+            'exception_text': self.exception_text,
         }
         defaults.update(kwargs)
         return super(StdNumField, self).formfield(**defaults)
