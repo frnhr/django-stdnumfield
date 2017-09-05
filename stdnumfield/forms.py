@@ -11,7 +11,8 @@ class StdnumField(forms.CharField):
     alphabets = None
 
     def __init__(self, max_length=None, min_length=None, strip=True,
-                 formats=None, alphabets=None, *args, **kwargs):
+                 formats=None, alphabets=None, exception_text=None,
+                 *args, **kwargs):
         super(StdnumField, self).__init__(max_length, min_length, strip,
                                           *args, **kwargs)
         if formats is None:
@@ -31,8 +32,12 @@ class StdnumField(forms.CharField):
                     ))
         self.formats = formats
         self.alphabets = alphabets
+        self.exception_text = exception_text
 
     def validate(self, value):
         super(StdnumField, self).validate(value)
-        validator = StdnumFormatValidator(self.formats, self.alphabets)
+        validator = StdnumFormatValidator(
+            self.formats,
+            exception_text=self.exception_text,
+        )
         validator(value)
