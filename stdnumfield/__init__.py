@@ -3,4 +3,4 @@
 from ._formats import formats
 
 STDNUM_FORMATS = formats
-VERSION = "0.2.0"
+VERSION = "0.2.1"

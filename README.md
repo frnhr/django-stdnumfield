@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/frnhr/django-stdnumfield/branch/master/graph/badge.svg)](https://codecov.io/gh/frnhr/django-stdnumfield)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-version: 0.2.0
+version: 0.2.1
 
 ## What's an stdnum?
 

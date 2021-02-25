@@ -14,7 +14,7 @@ setup(
     name="django-stdnumfield",
     version=stdnumfield.VERSION,
     packages=["stdnumfield"],
-    install_requires=["python-stdnum>=1.11,<1.12"],
+    install_requires=["python-stdnum>=1.15,<1.16"],
     extras_require={
         "dev": [
             "prettyprinter",
